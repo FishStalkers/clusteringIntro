@@ -4,8 +4,8 @@ mice.data <- Read10X(data.dir = "raw_gene_bc_matrices/mm10/")
 mice_data <- CreateSeuratObject(counts = pbmc.data, project  ="mice_data", 
                                 min.cells = 3, min.features = 200)
 #visualizes sum
-sumsArray <- rowSums(mice.data[1:250,])
-meansArray <- rowMeans(mice.data[1:250,])
+sumsArray <- rowSums(mice.data)
+meansArray <- rowMeans(mice.data)
 barplot(sumsArray[1:50], main = "Average of Genes")
 barplot(sumsArray[51:100] ,main = "Average of Genes")
 barplot(sumsArray[101:150] , main ="Average of Genes")
@@ -24,6 +24,8 @@ head(colnames(mice_data))
 #converts to csv and get count of each gene
 mice_data[["percent.mt"]] <- PercentageFeatureSet(mice_data, pattern = "^mt-")
 mice_datacsv <- GetAssayData(object = mice_data, slot ='counts')
+fwrite(as.data.table(sumsArray,keep.rownames = "feature"), "sums.csv")
+fwrite(as.data.table(meansArray,keep.rownames = "feature"), "means.csv")
 fwrite(as.data.table(mice_datacsv,keep.rownames = "feature"), "counts.csv")
 #imports data frame 
 df <- read.csv("counts.csv")

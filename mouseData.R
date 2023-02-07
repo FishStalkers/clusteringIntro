@@ -1,7 +1,7 @@
 pacman::p_load(dplyr, Seurat, patchwork)
 #reads data 
-pbmc.data <- Read10X(data.dir = "raw_gene_bc_matrices/mm10/")
-mice_data <- CreateSeuratObject(counts = pbmc.data, project  ="mice_data", 
+mice.data <- Read10X(data.dir = "raw_gene_bc_matrices/mm10/")
+mice_data <- CreateSeuratObject(counts = mice.data, project  ="mice_data", 
                                 min.cells = 3, min.features = 200)
 head(mice_data)
         mice_data[["percent.mt"]] <- PercentageFeatureSet(mice_data, pattern = 
@@ -52,6 +52,8 @@ mice_data.markers <- FindAllMarkers(mice_data, only.pos =  TRUE, min.pct = 0.25,
 x <- mice_data.markers %>% group_by(cluster) %>% top_n(n=1, wt = avg_log2FC)
 plot1 <- FeaturePlot(mice_data, features = x$gene[1:4])
 plot2 <- FeaturePlot(mice_data, features = x$gene[5:8])
-plot1 + plot2
+plot1
+plot2
 top10 <- mice_data.markers %>% group_by(cluster) %>% top_n(n=1, wt = avg_log2FC)
 top10
+
