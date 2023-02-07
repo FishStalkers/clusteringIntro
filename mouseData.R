@@ -21,7 +21,32 @@ mice_data <- NormalizeData(mice_data, normalization.method = "LogNormalize")
 mice_data <- FindVariableFeatures(mice_data, selection.method = "vst", nfeatures = 2000)
 top10 <- head(VariableFeatures(mice_data),10)
 top10
+#finds variable features
 plot1 <- VariableFeaturePlot(mice_data)
 plot2 <- LabelPoints(plot = plot1, points = top10, repel = TRUE)
 plot1 + plot2
+#scales and normalize data
 all.genes <- rownames(mice_data)
+mice_data <- ScaleData(mice_data)
+#reduce data 
+mice_data <- RunPCA(mice_data, features = VariableFeatures(object = mice_data))
+print(mice_data[["pca"]], dims = 1:2, nfeatures = 5)
+
+#visualizes impact of each gene
+VizDimLoadings(mice_data, dims = 1:2, nfeatures = 15, reduction = "pca")
+#dim plot
+DimPlot(mice_data, reduction ="pca")
+DimHeatmap(mice_data, dims = 1, cells = 500, balanced = TRUE)
+#elbow method 
+ElbowPlot(mice_data)
+#Clusterring
+mice_data <- FindNeighbors(mice_data, dims = 1:13)
+#UMAP
+mice_data <- RunUMAP(mice_data, dims = 1:13)
+DimPlot(mice_data, reduction = "umap")
+#Finding Markers:
+cluster1.markers <- FindMarkers(mice_data, ident.1 =1, min.pct = 0.25)
+head(cluster1.markers)
+VlnPlot(mice_data, features = c(row.names(cluster1.markers)[1]),row.names(cluster1.markers)[2])
+
+        
