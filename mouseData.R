@@ -6,6 +6,8 @@ mice_data <- CreateSeuratObject(counts = pbmc.data, project  ="mice_data",
 head(mice_data)
         mice_data[["percent.mt"]] <- PercentageFeatureSet(mice_data, pattern = 
                                                             "^mt-")
+head(rownames(mice_data)) 
+head(mice_data["Xkr4" ]["nCount_RNA"])
 #plotting out features for filtering
 VlnPlot(mice_data, features = c("nFeature_RNA", "nCount_RNA","percent.mt"), 
         ncol = 3)
