@@ -30,10 +30,10 @@ all.genes <- rownames(mice_data)
 mice_data <- ScaleData(mice_data)
 #reduce data 
 mice_data <- RunPCA(mice_data, features = VariableFeatures(object = mice_data))
-print(mice_data[["pca"]], dims = 1:2, nfeatures = 5)
+print(mice_data[["pca"]], dims = 1:2, nfeatures = 14)
 
 #visualizes impact of each gene
-VizDimLoadings(mice_data, dims = 1:2, nfeatures = 15, reduction = "pca")
+VizDimLoadings(mice_data, dims = 1:2, nfeatures = 14, reduction = "pca")
 #dim plot
 DimPlot(mice_data, reduction ="pca")
 DimHeatmap(mice_data, dims = 1, cells = 500, balanced = TRUE)
@@ -41,12 +41,15 @@ DimHeatmap(mice_data, dims = 1, cells = 500, balanced = TRUE)
 ElbowPlot(mice_data)
 #Clusterring
 mice_data <- FindNeighbors(mice_data, dims = 1:13)
+mice_data <- FindClusters(mice_data, resolution = 0.5)
 #UMAP
-mice_data <- RunUMAP(mice_data, dims = 1:13)
+mice_data <- RunUMAP(mice_data, dims = 1:10)
 DimPlot(mice_data, reduction = "umap")
 #Finding Markers:
-cluster1.markers <- FindMarkers(mice_data, ident.1 =2, min.pct = 0.25)
-head(cluster1.markers)
-VlnPlot(mice_data, features = c(row.names(cluster1.markers)[1]),row.names(cluster1.markers)[2])
-
-        
+mice_data.markers <- FindAllMarkers(mice_data, only.pos =  TRUE, min.pct = 0.25, logfc.threshold = 0.25)
+x <- mice_data.markers %>% group_by(cluster) %>% top_n(n=1, wt = avg_log2FC)
+plot1 <- FeaturePlot(mice_data, features = x$gene[1:4])
+plot2 <- FeaturePlot(mice_data, features = x$gene[5:8])
+plot1 + plot2
+top10 <- mice_data.markers %>% group_by(cluster) %>% top_n(n=1, wt = avg_log2FC)
+top10
