@@ -45,7 +45,7 @@ mice_data <- FindNeighbors(mice_data, dims = 1:13)
 mice_data <- RunUMAP(mice_data, dims = 1:13)
 DimPlot(mice_data, reduction = "umap")
 #Finding Markers:
-cluster1.markers <- FindMarkers(mice_data, ident.1 =1, min.pct = 0.25)
+cluster1.markers <- FindMarkers(mice_data, ident.1 =2, min.pct = 0.25)
 head(cluster1.markers)
 VlnPlot(mice_data, features = c(row.names(cluster1.markers)[1]),row.names(cluster1.markers)[2])
 
