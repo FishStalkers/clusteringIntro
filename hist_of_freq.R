@@ -13,10 +13,10 @@ pbmc.data[1:30]
 CD3D.data <- pbmc.data[c("CD3D"), 1:2700]
 CD3D.data[1:30]
 pbmc.data[c("CD3D"), 1:30]
-RPL11.data <-- pbmc.data[c("RPL11"), 1:2700]
-MS4A1.data <-- pbmc.data[c("MS4A1"), 1:2700]
-ND1.data <-- pbmc.data[c("MT-ND1"), 1:2700]
-ND4.data <-- pbmc.data[c("MT-ND4"), 1:2700]
+RPL11.data <- pbmc.data[c("RPL11"), 1:2700]
+MS4A1.data <- pbmc.data[c("MS4A1"), 1:2700]
+ND1.data <- pbmc.data[c("MT-ND1"), 1:2700]
+ND4.data <- pbmc.data[c("MT-ND4"), 1:2700]
 
 data <- data.frame(x = c("CD3D", "RPL11", "MS4A1", 
                          "MT-ND1","MT-ND4"), y= c(CD3D.data, RPL11.data, MS4A1.data, 
@@ -37,5 +37,8 @@ dim(as.matrix(CD3D.data))
 hist_1 <- hist(CD3D.data, xlim=c(6,100), breaks = 40)
 hist_2 <- hist(CD3D.data, xlim=c(6, 100), breaks = 40)
 hist_2
-hist_3 <- hist(CD3D.data, xlim=c(9, 48), ylim = c(-1, 12),breaks = 40)
-hist_3
+hist_cd3d <- hist(CD3D.data, xlim=c(9, 48), ylim = c(-1, 12),breaks = 40)
+hist_rpl11 <- hist(RPL11.data, xlim=c(0, 100), ylim = c(-1, 500),breaks = 100)
+hist_ms4a1 <- hist(MS4A1.data, xlim=c(0, 100), ylim = c(-1, 500),breaks = 100)
+hist_nd1 <- hist(ND1.data, xlim=c(0, 100), ylim = c(-1, 500),breaks = 100)
+hist_nd1 <- hist(ND4.data, xlim=c(0, 100), ylim = c(-1, 500),breaks = 100)
