@@ -2,7 +2,7 @@
 pacman::p_load(dplyr, Seurat, patchwork, data.table, psych, tidyverse)
 mice.data <- Read10X(data.dir = "raw_gene_bc_matrices/mm10/")
 mice_data <- CreateSeuratObject(counts = pbmc.data, project  ="mice_data", 
-                                min.cells = 3, min.features = 200)
+min.cells = 3, min.features = 200)
 #visualizes sum
 sumsArray <- rowSums(mice.data)
 meansArray <- rowMeans(mice.data)
@@ -17,8 +17,6 @@ barplot(meansArray[51:100], main = "Average of Genes")
 barplot(meansArray[101:150], main = "Average of Genes")
 barplot(meansArray[151:200], main = "Average of Genes")
 barplot(meansArray[201:250,], main ="Average of Genes")
-
-
 head(rownames(mice_data))
 head(colnames(mice_data))
 #converts to csv and get count of each gene
@@ -31,6 +29,3 @@ fwrite(as.data.table(mice_datacsv,keep.rownames = "feature"), "counts.csv")
 df <- read.csv("counts.csv")
 describe(df)
 dim(df)
-
-
-
