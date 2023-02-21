@@ -16,6 +16,7 @@
 - We then build a graph of the remaining similarity table and select core points to form our neighborhood based on the constraint such that for the KNN list that $sim(u,v) \geq \epsilon $
 - We then assign points based on if density is greater than the minimum points and form clusters based on $\epsilon$
 - We then align points to cluster
+- The overall time complexity of this approach is $O(n^2)$
 ## Dimensionality Reduction 
 ### Feature Selection for Individual Datasets: VST
 - The following algorithm aims to find differences between features by aiming to find highly variable features
