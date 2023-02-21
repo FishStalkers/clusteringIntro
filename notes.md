@@ -45,8 +45,14 @@
 - Given a count matrix, let's define $X$ as the row vector of features and $X_{\mu}$ denote the vector corresponding to each mean of the feature
 - Let $Z$ define the normalized vector of $X$, moreover let's define a function: $g(X): \R^{|X|} \rightarrow \R^{|X|}, x \in \R^{|X|}$  where our function $g(X)$ performs $f(x)$ on each entry of X. (1)
 - We then calculate the standarized variance defined as $\frac{X - X_{\mu}}{g(X)}$ and select features based on this variance (1)
-Relevant Sources:
+## DeSeq2
+- A method of estimating fold change and dispersion for RNA-sequences
+- In layman terms, it first calculate the means of each feature and some sort of dispersion metric such as variance
+- We then fit our feature data over some Negative Binomial Regression Model defined as:
+$K \sim NB(\mu, dispersion = \sigma = \alpha )$ for each feature
+- Once we fit a linear model, the weights of our model can be used to calculate the log fold changes of our model and aime to see which genes are expressed differentially 
+## Relevant Sources:
 1. https://www.sciencedirect.com/science/article/pii/S0092867419305598?via%3Dihub
 2. https://ieeexplore.ieee.org/document/7839671
-3.  https://tivadardanka.com/blog/how-tsne-works
-4.  
+3. https://tivadardanka.com/blog/how-tsne-works
+4. https://genomebiology.biomedcentral.com/articles/10.1186/s13059-014-0550-8
