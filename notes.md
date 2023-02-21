@@ -1,4 +1,9 @@
 # Introduction 
+# PCA
+- PCA is a statistical approach to reducing data set 
+- In a sense, it takes the covariance matrix of each feature and diagonalizes the matrix with each eigenvector normalized to form an orthonormal basis 
+- We often that find the largest eigenvalue often correspond to the variance of our dataset
+- Moreover, we find that we can define cumulative explained variance of a certain component can be found by dividing the eigenvalue corresponding to the eigenvector to the sum of all eigenvalues
 ## Shared Nearest Neighbor
 - Traditional clusterring algorithms such as K-means provide a polynomial runtime algorithm to order a set of unlabelled data and find structural similarity (2)
 - With higher dimension, the flaws of these traditional algorithms are clear due to the high dimensionality data it may be harder to capture similarities within data in a meaningful manner (2)
