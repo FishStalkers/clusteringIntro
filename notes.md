@@ -48,4 +48,5 @@
 Relevant Sources:
 1. https://www.sciencedirect.com/science/article/pii/S0092867419305598?via%3Dihub
 2. https://ieeexplore.ieee.org/document/7839671
-3. 
+3.  https://tivadardanka.com/blog/how-tsne-works
+4.  
