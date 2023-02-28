@@ -52,8 +52,16 @@ mice_data.markers <- FindAllMarkers(mice_data, only.pos =  TRUE, min.pct = 0.25,
 x <- mice_data.markers %>% group_by(cluster) %>% top_n(n=1, wt = avg_log2FC)
 plot1 <- FeaturePlot(mice_data, features = x$gene[1:4])
 plot2 <- FeaturePlot(mice_data, features = x$gene[5:8])
+
 plot1
 plot2
 top10 <- mice_data.markers %>% group_by(cluster) %>% top_n(n=1, wt = avg_log2FC)
 top10
+#assigning markers
+new.cluster.id = c('OpCml','PcP4','Gria2','Hmgb2', 'Fabp7', 'Ppp2rb','Meg3', 
+                   'Reln')
+names(new.cluster.id) <- levels(mice_data)
+mice_data <- RenameIdents(mice_data,new.cluster.id)
+DimPlot(mice_data, reduction = "umap", label = "True")
+
 
