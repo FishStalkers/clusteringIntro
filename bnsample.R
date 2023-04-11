@@ -34,3 +34,4 @@ fitted.hybrid.group <- bn.fit(avg.boot.hc.dag.hybrid.group,counts)
 detach("package:bnlearn")
 save.image(file="Network_1000rep_BB.RData")
 quit()
+
